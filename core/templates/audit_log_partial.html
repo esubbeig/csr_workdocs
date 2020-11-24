@@ -1,0 +1,39 @@
+<table class="table table-hover table-striped table-bordered tbl_mx" id="audit_logs_tbl">
+    <thead class="thead-dark">
+        <tr>
+
+        <th class="no-sort">Project</th>
+        <th class="no-sort">Action</th>
+        <th class="no-sort">Changed From</th>
+        <th class="no-sort">Changed To</th>
+        <th class="no-sort">Reason</th>
+        <th class="no-sort">Changed By</th>
+        <th>Changed On</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in audit_logs %}
+
+            <tr>
+                
+                <td>
+                    {% if log.client %}
+                        {{ log.client.client_name }}
+                    {% elif log.project %}
+                        {{ log.project.project_name }}
+                    {% endif %}
+                </td>
+                <td>{{ log.action }}</td>
+                <td>{{ log.previous_state }}</td>
+                <td>{{ log.current_state }}</td>
+                <td>{{ log.reason }}</td>
+                <td>{{ log.user.username }}</td>
+                <td>{{ log.timestamp|date:"d/m/Y H:i:s" }}</td>
+                
+            </tr>
+
+        {% endfor %}
+        
+    </tbody>
+</table>

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="container page-body-wrapper">
+		<div class="main-panel">
+        	<div class="content-wrapper">
+
+          		<div class="row cust_row">
+            		<div class="col-md-12 grid-margin">
+              			<div class="d-flex justify-content-between align-items-center">
+                			<div>
+                  				<h4 class="mb-0 breadcrumb_">Activity Log</h4>
+                    			<a href="{% url 'home' %}" class="bread__lnk">Home </a> / <label class="bread__lnk" id="activity_log_bread">Activity Log</label>
+                			</div>
+            			</div>
+        			</div>
+    			</div>
+
+                <div class="bg_frm nomrg_frm">
+
+                    <div class="row">
+
+                        <div class="form-group col-md-2">
+                            <label for="avt_log_user" class="cust_lbl"><strong>User :</strong></label>
+                            <select class="custom-select custom_input" id="avt_log_user">
+                                <option value="all">All</option>
+                                {% for usr in users %}
+                                    <option value="{{ usr.id }}">{{ usr.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2 pl-0 pr-0">
+                          <label for="acvt_from_date" id="actv_from_date_label" class="cust_lbl"><strong>From Date :</strong></label>
+                          <input type="text" autocomplete="off" id="acvt_from_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name="" />
+                        </div>
+
+                        <div class="form-group col-md-2 pl-0 pr-0">
+                          <label for="acvt_to_date" id="actv_to_date_label" class="cust_lbl"><strong>To Date :</strong></label>
+                          <input type="text" autocomplete="off" id="acvt_to_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+                        </div>
+
+                        <div class="form-group">
+                          <input type="button" class="btn btn-warning flt_btn__" name="" value="Filter" id="actv_log_flt_btn">
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+
+    			<div class="row">
+
+            		<div class="col-md-12 grid-margin stretch-card" id="activity_log_data" >
+                        
+                        {% if logs %}
+
+                            
+                			<table class="table table-hover table-striped table-bordered tbl_mx" id="activity_log">
+                				<thead class="thead-dark">
+                					<th style="width: 5%;">Activity ID</th><th class="no-sort" style="width: 15%;">User</th><th class="no-sort">Activity</th><th class="no-sort" style="width: 10%;">Date & Time</th><th style="width: 10%;">IP Address</th>
+                    			</thead>
+                    			<tbody>
+                    				
+    	                				{% for log in logs %}
+    		                				<tr>
+                                                <td>{{ log.event.id }}</td>
+                                                <td>{{ log.user }}</td>
+    		                					<td>{{ log.message }}</td>
+                                                <td>{{ log.created_on|date:"d/m/Y H:i:s" }}</td>
+                                                <td>{{ log.ip }}</td>
+    		                				</tr>
+    	                				{% endfor %}
+                                        
+                    			</tbody>
+                			</table>
+
+                        {% else %}
+
+                            <div class="no_res"> No Result Found </div>
+                                    
+                        {% endif %}
+            	
+            		</div>
+            	</div>
+
+            	
+
+			</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}

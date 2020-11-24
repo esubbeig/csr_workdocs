@@ -1,0 +1,18 @@
+<table class="table table-hover table-striped table-bordered tbl_mx" id="activity_log_tbl">
+	<thead class="thead-dark">
+		<th style="width: 5%;">Activity ID</th><th style="width: 15%;">User</th><th class="no-sort">Activity</th><th style="width: 10%;">Date & Time</th><th style="width: 10%;">IP Address</th>
+	</thead>
+	<tbody>
+		
+			{% for log in logs %}
+				<tr>
+                    <td>{{ log.event.id }}</td>
+                    <td>{{ log.user }}</td>
+					<td>{{ log.message }}</td>
+                    <td>{{ log.created_on|date:"d/m/Y H:i:s" }}</td>
+                    <td>{{ log.ip }}</td>
+				</tr>
+			{% endfor %}
+            
+	</tbody>
+</table>

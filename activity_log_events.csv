@@ -1,0 +1,75 @@
+event,message
+Add User,"added a user ""#""."
+Activate User,"activated user ""#""."
+Deactivate User,"deactivated user ""#""."
+Create Project,"created the project ""#""."
+Assign Project,"assigned project ""#"" to the @."
+CSR Upload,"uploaded CSR against client ""#""."
+CSR Download,Downloaded CSR Template
+Edit Project,"edited the project ""#""."
+Protocol Upload,"uploaded Protocol against project ""#""."
+SAR Upload,"uploaded SAR against project ""#""."
+Upload Protocol,"uploaded Protocol against client ""#""."
+Upload SAR,"uploaded SAR against client ""#""."
+Custom CSR Upload,"uploaded CSR against project ""#""."
+Generate CSR,"generated CSR against project ""#""."
+Edit Custom CSR,"edited custom CSR mapping of project ""#""."
+CSR Mapping,"edited global CSR mapping of client ""#""."
+Resend Email,resent an email against # for $.
+Clear Configurations,"cleared the Global Configurations of client ""#""."
+Configurations Clear,"cleared the Configurations of project ""#""."
+Another Document,"added @ in project ""#""."
+Another Doc Upload,"uploaded @ against project ""#""."
+Add Client,"created a client ""#""."
+Activate Client,"activated client ""#""."
+Deactivate Client,"deactivated client ""#""."
+FinalCSR Upload,"uploaded Final CSR against project ""#""."
+Share Document,"shared the report # in project ""@""."
+Login,logged into the system.
+Logout,logged out from the application.
+Change Password,changed the login password.
+Nav Global CSR Upload,accessed the UPLOAD CSR page.
+Nav Project Dashboard,"accessed the project ""#"" dashboard."
+Add Report Comments,"commented on report # in project ""@""."
+View Report Comments,"viewed comments of report # in project ""@""."
+Nav Activity Log,accessed the Activity Log page.
+Nav Audit Log,accessed the Audit Log page.
+Nav Global CSR Mapping,"clicked on the Map CSR button of client ""#"" in UPLOAD CSR page."
+Add Email Configuration,added the Email Configuration.
+Nav Email Configuration,accessed the Email Configuration tab in settings.
+Nav Email Log,accessed the Email Log page.
+Nav Clients,accessed the Clients page.
+Nav Users,accessed the Users page.
+Nav Protocol Search,accessed the Protocol Search page.
+Nav Change Password,accessed the Change Password tab in settings.
+Nav Share Document,"clicked on the share icon of report # in project ""@""."
+Nav Edit Custom CSR,"clicked on the Edit Mapping button in project ""#"" dashboard."
+Nav Generate CSR,"clicked on the Generate CSR button in project ""#"" dashboard."
+Nav Add Report Comments,"clicked on the add comment icon of report # in project ""@""."
+Nav FinalCSR Upload,"clicked on the Upload button of Final CSR in project ""#""."
+Nav Add Client,clicked on the Add Client button in Clients page.
+Click Create Project Btn,clicked on the Create Project button in PROJECTS page.
+Nav Edit Project,"clicked on the Edit Project button of ""#"" in projects page."
+Nav CSR Upload,"clicked on the Upload button of Global CSR Template for client ""#"" in UPLOAD CSR page."
+Nav Upload Protocol,"clicked on the Upload button of Protocol for client ""#"" in UPLOAD CSR page."
+Nav Upload SAR,"clicked on the Upload button of SAR for client ""#"" in UPLOAD CSR page."
+Nav Custom CSR Upload,"clicked on the Upload button of CSR Template in project ""#""."
+Nav Protocol Upload,"clicked on the Upload button of Protocol in project ""#""."
+Nav SAR Upload,"clicked on the Upload button of SAR in project ""#""."
+Click Assign Project Btn,"clicked on the Assign Project button of ""#"" in PROJECTS page."
+Change client in UPLOAD CSR,"selected the Client option ""#"" in UPLOAD CSR page."
+Nav Projects,accessed the PROJECTS page.
+Nav Add User,clicked on Add User button in Users page.
+Nav Another Doc Upload,"clicked on the Upload button of @ in project ""#""."
+Dispaly Global CSR Mapping,accessed the GLOBAL CSR MAPPING page.
+Download Global CSR,"downloaded CSR Template (#) of client ""@""."
+Download Global Protocol,"downloaded Protocol (#) of client ""@""."
+Download Global SAR,"downloaded SAR (#) of client ""@""."
+Download Custom CSR,"downloaded CSR Template (#) of project ""@""."
+Download Protocol,"downloaded Protocol (#) of project ""@""."
+Download SAR,"downloaded SAR (#) of project ""@""."
+Download Another Document,"downloaded * (#) of project ""@""."
+Download Report,"downloaded CSR report (#) of project ""@""."
+Change Users Acvt,"selected the user option ""#"" in Activity Log page."
+Change Users Audt,"selected the user option ""#"" in Audit Log page."
+Change Client Global Mapping,"selected the client option ""#"" in Global CSR Mapping page."

@@ -1,0 +1,35 @@
+{% load filters %}
+{% load static %}
+{% if protocol_list %}
+
+  <table class="table table-hover table-striped table-bordered" id="ad_protocol_tbl">
+    <thead class="thead-dark">
+      <tr>
+        <th>Document Name</th>
+        <th>Client Name</th>
+        <th class="no-sort">Remarks</th>
+        <th class="no-sort">Uploaded By</th>
+        <th>Uploaded On</th>
+        <!-- <th class="no-sort">Remarks</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in protocol_list %}
+        <tr>
+          <td style="white-space: pre-wrap;word-break: break-all;"><a title="Download" class="link_grid dwnl_lnk" href="{{ i.protocol_template_location.url }}" target="_blank">{{ i.protocol_template_location|get_file_name }}</a></td>
+          
+          <td style="white-space: pre-wrap;word-break: break-all;"><a class="link_grid" href="{% url 'global_csr_upload' i.client.id %}">{{ i.client.client_name }}</a></td>
+          <td style="white-space: pre-wrap;word-break: break-all;">{{ i.comments }}</td>
+          <td>{{ i.created_by }}</td>
+          <td>{{ i.created_on|date:"d/m/Y H:i" }}</td>
+          <!-- <td>{{ i.comments }}</td> -->
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% else %}
+
+  <div class="no_res"> No Result Found</div>
+
+{% endif %}

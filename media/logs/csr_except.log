@@ -1,0 +1,10 @@
+[2020-11-18 18:24:46] CRITICAL [csr_except.record_user_activity_log:988] ActivityLogEvents matching query does not exist.
+Traceback (most recent call last):
+  File "C:\quadone\csr\csr\core\admin_operations.py", line 180, in record_user_activity_log
+    activity_log_event = ActivityLogEvents.objects.get(event=event)
+  File "C:\Users\esubr\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\esubr\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 408, in get
+    self.model._meta.object_name
+core.models.ActivityLogEvents.DoesNotExist: ActivityLogEvents matching query does not exist.
+

@@ -1,0 +1,103 @@
+{% extends 'admin_home.html' %}
+{% load filters %}
+{% load static %}
+
+{% block admin_content %}
+		
+		<div class="container page-body-wrapper"> 
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="mb-0 breadcrumb_">Protocol Search</h4>
+                    <a href="{% url 'home' %}" class="bread__lnk">Home </a> / <label class="bread__lnk">Masters</label> / <label class="bread__lnk">Protocol Search</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg_frm nomrg_frm"> 
+
+            <div class="row cust_row">
+
+                <div class="form-group col-md-2">
+                  <label for="ad_filter_by" class="cust_lbl">Filter</label>
+                  <select class="form-control custom_input" id="ad_filter_by">
+                    <option value="">Select</option>
+                    <option value="client">Client</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-2 ">
+                  <label for="ad_filter_element" id="ad_filter_element_label" class="cust_lbl">Choose</label>
+                  <select class="form-control custom_input" id="ad_filter_element" name="ad_filter_element">
+                    <option value="">---------</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-2 pl-0 pr-0">
+                  <label for="ad_from_date" id="ad_from_date_label" class="cust_lbl">From Date</label>
+                  <input type="text" autocomplete="off" id="ad_from_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+                </div>
+
+                <div class="form-group col-md-2 ">
+                  <label for="ad_to_date" id="ad_to_date_label" class="cust_lbl">To Date</label>
+                  <input type="text" autocomplete="off" id="ad_to_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+                </div>
+
+                <div class="form-group">
+                  <input type="button" class="btn btn-warning flt_btn__" name="" value="Filter" id="ad_filter_btn">
+                </div>
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card" id="admin_protocol_partial">
+
+              {% if protocol_list %}
+
+                <table class="table table-hover table-striped table-bordered" id="ad_protocol_tbl">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Document Name</th>
+                      <th>Client Name</th>
+                      <th class="no-sort">Remarks</th>
+                      <th class="no-sort">Uploaded By</th>
+                      <th>Uploaded On</th>
+                      <!-- <th class="no-sort">Remarks</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in protocol_list %}
+                      <tr>
+                        <td style="white-space: pre-wrap;word-break: break-all;"><a title="Download" class="link_grid dwnl_lnk" href="{{ i.protocol_template_location.url }}" target="_blank" data-url="{{ i.id }}" id="down_protocol_link">{{ i.protocol_template_location|get_file_name }}</a></td>
+                        <td style="white-space: pre-wrap;word-break: break-all;"><a class="link_grid" href="{% url 'global_csr_upload' i.client.id %}">{{ i.client.client_name }}</a></td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.comments }}</td>
+                        <td>{{ i.created_by }}</td>
+                        <td>{{ i.created_on|date:"d/m/Y H:i" }}</td>
+                        <!-- <td>{{ i.comments }}</td> -->
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              {% else %}
+
+                <div class="no_res"> No Result Found</div>
+
+              {% endif %}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+{% endblock %}

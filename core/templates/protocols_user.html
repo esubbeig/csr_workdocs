@@ -1,0 +1,117 @@
+{% extends 'user_home.html' %}
+{% load filters %}
+{% load static %}
+
+{% block user_content %}
+		
+		<div class="container-float page-body-wrapper"> 
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="mb-0 breadcrumb_">Protocol Search</h4>
+                    <a href="{% url 'home' %}" class="bread__lnk">Home </a> / <label class="bread__lnk">Protocol Search</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="bg_frm nomrg_frm">
+            
+            <div class="row cust_row">
+             <div class="form-group col-md-2">
+              <label for="filter_by" class="cust_lbl">Filter By</label>
+              <select class="form-control custom_input" id="filter_by" autocomplete="off">
+                <option value="">Select</option>
+                <option value="project">Project</option>
+                <option value="protocol_id">Protocol ID</option>
+                <option value="therapeutic_area">Therapeutic Area</option>
+                <option value="phase">Phase</option>
+                <option value="client">Client</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-2 pl-0 pr-0">
+              <label for="filter_element" id="filter_element_label" class="cust_lbl">Choose</label>
+              <select class="form-control custom_input" id="filter_element" name="filter_element" autocomplete="off">
+                <option value="">---------</option>
+                
+              </select>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="from_date" id="from_date_label" class="cust_lbl">From Date</label>
+              <input type="text" autocomplete="off" id="from_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="to_date" id="to_date_label" class="cust_lbl">To Date</label>
+              <input type="text" autocomplete="off" id="to_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+            </div>
+
+            <div class="form-group">
+              <input type="button" class="btn btn-warning flt_btn__" name="" value="Filter" id="filter_btn">
+            </div>
+            </div>
+          
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card" id="user_protocol_partial">
+
+              {% if protocol_list %}
+
+                <table class="table table-hover table-striped table-bordered" id="protocol_tbl">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Document Name</th>
+                      <th>Project</th>
+                      <th>Protocol ID</th>
+                      <th>Therapeutic Area</th>
+                      <th>Phase</th>
+                      <th>Client Name</th>
+                      <th class="no-sort">Remarks</th>
+                      <th class="no-sort">Uploaded By</th>
+                      <th>Uploaded On</th>
+                      <!-- <th class="no-sort">Remarks</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in protocol_list %}
+                      <tr>
+                        <td style="white-space: pre-wrap;word-break: break-all;"><a class="link_grid dwnl_lnk" title="Download" href="{{ i.protocol_document_location.url }}" target="_blank" id="down_customprotocol_link" data-url="{{ i.id }}">{{ i.protocol_document_location|get_file_name }}</a></td>
+                        
+                        <td style="white-space: pre-wrap;word-break: break-all;"><a class="link_grid" href="{% url 'project_dashboard' user.id i.project.id %}">{{ i.project.project_name }}</a></td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.project.protocol_id }}</td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.project.therapeutic_area.therapeutic_area }}</td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.project.phase }}</td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.project.client.client_name }}</td>
+                        <td style="white-space: pre-wrap;word-break: break-all;">{{ i.comments }}</td>
+
+                        <td>{{ i.created_by }}</td>
+                        <td>{{ i.uploaded_on|date:"d/m/Y H:i" }}</td>
+                        <!-- <td>{{ i.comments }}</td> -->
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              {% else %}
+
+                <div class="no_res nores_v"> No Result Found</div>
+
+              {% endif %}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+{% endblock %}

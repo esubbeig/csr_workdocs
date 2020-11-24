@@ -1,0 +1,52 @@
+{% load filters %}
+
+<form class="share_doc_form" method="POST" data-url="{% url 'share_workDocs' report.id %}">
+{% csrf_token %}
+
+
+	<div class="modal-header">
+		<h5 class="modal-title" id="share_doc_modalLabel">Share Document</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+
+		{% if projectXusers %}
+		
+			<h6>Select Users</h6>
+		    <table class="table table-hover table-striped table-bordered">
+
+		      	<thead></thead>
+		      	<tbody>
+		        	{% for each in projectXusers %}
+		        	<tr>
+		          		<td>
+		          			{{ each.user.username }}
+		          		</td>
+		          		<td>
+		          			<input type="checkbox" name="check_user_to_share" value="{{ each.user.id }}" {% if each.user.id|convert_to_str in is_already_shared %} checked {% endif %}>
+		          		</td>
+		      		</tr>
+		      		{% endfor %}
+		  		</tbody>
+		  	</table>
+
+		{% else %}
+
+			<h6 style="color: red;">Sorry!</h6>
+			<p>This project have not been assigned to anyone. Please contact Admin!</p>
+
+		{% endif %}
+
+	</div>
+
+	{% if projectXusers %}
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-primary">Share</button>
+		</div>
+
+	{% endif %}
+
+</form>

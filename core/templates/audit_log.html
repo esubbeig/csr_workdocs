@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="container page-body-wrapper">
+		<div class="main-panel">
+        	<div class="content-wrapper">
+
+          		<div class="row cust_row">
+            		<div class="col-md-12 grid-margin">
+              			<div class="d-flex justify-content-between align-items-center">
+                			<div>
+                  				<h4 class="mb-0 breadcrumb_">Audit Log</h4>
+                    			<a href="{% url 'home' %}" class="bread__lnk">Home </a> / <label class="bread__lnk" id="audit_log_bread">Audit Log</label>
+                			</div>
+                			
+            			</div>
+        			</div>
+    			</div>
+
+                <div class="bg_frm nomrg_frm">
+
+                    <div class="row">
+
+                        <div class="form-group col-md-2" {% if not request.user.is_superuser %} hidden {% endif %}>
+                            <label for="adt_log_user" class="cust_lbl"><strong>User</strong></label>
+                            <select class="custom-select custom_input" id="adt_log_user">
+                                <option value="all">All</option>
+                                {% for usr in users %}
+                                    <option value="{{ usr.id }}" {% if usr.id == request.user.id and not request.user.is_superuser %} selected {% endif %}>{{ usr.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                         <div class="form-group col-md-2">
+                            <label for="adt_log_project" class="cust_lbl"><strong>Project</strong></label>
+
+                            <select class="custom-select custom_input" id="adt_log_project">
+                                <option value="all">All</option>
+                                {% for pro in projects %}
+                                    <option value="{{ pro.id }}">{{ pro.project_name }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+
+                        <div class="form-group col-md-2 pl-0 pr-0">
+                          <label for="audt_from_date" class="cust_lbl" id="audt_from_date_label"><strong>From Date</strong></label>
+                          <input type="text" autocomplete="off" id="audt_from_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+                        </div>
+
+                        <div class="form-group col-md-2 ">
+                          <label for="audt_to_date" class="cust_lbl" id="audt_to_date_label"><strong>To Date</strong></label>
+                          <input type="text" autocomplete="off" id="audt_to_date" class="form-control custom_input" placeholder="dd/mm/yyyy" name=""/>
+                        </div>
+
+                        <div class="form-group">
+                          <input type="button" class="btn btn-warning flt_btn__" name="" value="Filter" id="audt_log_flt_btn">
+                        </div>
+
+                    </div>
+
+                </div>
+    			
+
+    			<div class="row">
+
+            		<div class="col-md-12 grid-margin stretch-card" id="audit_log_data">
+                        
+
+                            {% if audit_logs %}
+
+                                <table class="table table-hover table-striped table-bordered tbl_mx" id="audit_logs">
+                                    <thead class="thead-dark">
+                                        <tr>
+
+                                        <th class="no-sort">Project</th>
+                                        <th class="no-sort">Action</th>
+                                        <th class="no-sort">Changed From</th>
+                                        <th class="no-sort">Changed To</th>
+                                        <th class="no-sort">Reason</th>
+                                        <th class="no-sort">Changed By</th>
+                                        <th>Changed On</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for log in audit_logs %}
+
+                                            <tr>
+                                                
+                                                <td>
+                                                    {% if log.client %}
+                                                        {{ log.client.client_name }}
+                                                    {% elif log.project %}
+                                                        {{ log.project.project_name }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ log.action }}</td>
+                                                <td>{{ log.previous_state }}</td>
+                                                <td>{{ log.current_state }}</td>
+                                                <td>{{ log.reason }}</td>
+                                                <td>{{ log.user.username }}</td>
+                                                <td>{{ log.timestamp|date:"d/m/Y H:i:s" }}</td>
+                                                
+                                            </tr>
+
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+
+                                
+                                
+                            {% else %}
+
+                                <div class="no_res"> No Result Found </div>
+
+                            {% endif %}
+
+
+
+                        
+            		</div>
+            	</div>
+
+            	
+
+			</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}

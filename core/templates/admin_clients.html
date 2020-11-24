@@ -1,0 +1,109 @@
+{% extends 'admin_home.html' %}
+
+{% block admin_content %}
+		
+		<div class="container page-body-wrapper"> 
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="mb-0 breadcrumb_">Clients</h4>
+                    <a href="{% url 'home' %}" class="bread__lnk">Home </a> / <label class="bread__lnk">Masters</label> / <label class="bread__lnk">Clients</label>
+                </div>
+                <div>
+                  <button type="button" class="new_sub create__prj" data-href="{% url 'add_client' %}" data-toggle="modal" data-target="#add_client_modal" id="add_client_link"><i class="ti-user"></i><span> Add Client</span></button>
+                  
+                </div>
+
+              </div>
+              <div style="text-align: right">
+
+                <div class="custom-control custom-checkbox mr-sm-2">
+
+                    <input type="checkbox" class="custom-control-input client_inactive" id="customControlAutosizing" checked="true" style="">
+                    <label class="custom-control-label" for="customControlAutosizing" style="font-weight: normal;font-size: 15px;padding-top: 2px;color: #19408f">Hide inactive clients</label>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+		      <div class="row">
+            <div class="col-md-12 grid-margin stretch-card admin_clients_div">
+              {% if clients %}
+                <table class="table table-hover table-striped table-bordered" id="admin_clients">
+                	<thead class="thead-dark">  
+                    <tr>
+                    <th>Client Name</th>
+                    <th class="no-sort">No. of Projects  </th>
+                    <th class="no-sort">Status </th>
+                    <th class="no-sort">Action</th> 
+                    
+                  </tr></thead>
+                  <tbody>
+
+                  	{% for clnt in clients %}
+  						        
+                   			<tr>
+                      			<td>{{ clnt.client_name }}</td>
+                      			<td>{{ clnt.project_count }}</td>
+                            <td>
+                              {% if clnt.is_active %}
+                      
+                                <span class="badge badge-brd-primary">Active</span>
+                      
+                              {% else %}
+                     
+                                <span class="badge badge-disable">Disabled</span>
+                      
+                              {% endif %}
+                            </td>
+                      			<td>
+                      			
+                            {% if clnt.is_active %}
+                              <a href="{% url 'deactivate_client' clnt.id %}" onclick="return confirm('Are you sure you want to deactivate this client?');">
+                              <span class="badge badge-danger">Deactivate</span>
+                              </a>
+                              
+                            {% else %}
+                              <a href="{% url 'activate_client' clnt.id %}" onclick="return confirm('Are you sure you want to activate this client?');">
+                              <span class="badge badge-success">Activate</span>
+                              </a>
+                            {% endif %}
+                   					</td>
+                      	</tr>
+                      
+  					        {% endfor %}
+  			 	        </tbody>
+                </table>
+                {% else %}
+
+                 <!-- <div class="no_res"> No Clients Available</div> -->
+                 <table class="table table-hover table-striped table-bordered" id="admin_clients">
+                  <thead class="thead-dark">  
+                    <tr>
+                    <th>Client Name</th>
+                    <th class="no-sort">No. of Projects  </th>
+                    <th class="no-sort">Status </th>
+                    <th class="no-sort">Action</th> 
+                    
+                  </tr></thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                
+
+                {% endif %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+{% endblock %}

@@ -1,0 +1,43 @@
+<div class="modal-header">
+	<h5 class="modal-title" id="shared_docs_by_modalLabel">Share by me</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+
+	{% if shared_documents_list %}
+
+		<table class="table table-hover table-striped table-bordered">
+	        <thead class="thead-dark">
+	        	<th>Document</th>
+	        	<th>Version</th>
+	        	<th>Shared By</th>
+	        	<!-- <th>Shared with</th> -->
+	        	<th>Shared On</th>
+	        </thead>
+	        <tbody>
+	        	{% for each in shared_documents_list %}
+
+	        		<tr>
+	        			<td style="white-space: pre-wrap;word-break: break-all;"><a href="{% url 'download_workdocs_doc' each.document_id %}" target="_blank">{{ each.document_name }}</a></td>
+	        			<td>{{ each.report.version_no }}</td>
+	        			<td>{{ each.shared_by }}</td>
+	        			<!-- <td>{{ each.shared_with }}</td> -->
+	        			<td>{{ each.shared_on|date:"d/m/Y H:i" }}</td>
+	        		</tr>
+
+	        	{% endfor %}
+	        </tbody>
+	    </table>
+
+	{% else %}
+
+		<h6>You have not shared any document yet!</h6>
+
+	{% endif %}
+	
+</div>
+
+<div class="modal-footer"></div>

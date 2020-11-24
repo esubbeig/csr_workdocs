@@ -1,0 +1,30 @@
+<form class="add_comments_form" method="POST" data-url="{% url 'add_report_comments' report_id %}">
+
+	{% csrf_token %}
+
+	<div class="modal-header">
+
+		<h5 class="modal-title" id="edit_project_modalLabel">Add Comments</h5>
+	    
+	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	    </button>
+
+
+  	</div>
+
+  	<div class="modal-body">
+  		
+  		<div class="form-group">
+  			<!-- <label for="comments">Comments</label> -->
+  			<textarea class="form-control" id="report_comments" name="comments" rows="4" autofocus required placeholder="Please add your comments here..."></textarea>
+  		</div>
+  		<span style="display: none;color: red;" id="report_comments_error">Textarea can't be blank</span>
+
+  	</div>
+
+  	<div class="modal-footer">
+  		<button type="submit" class="btn btn-primary">Save</button>
+  	</div>
+
+</form>

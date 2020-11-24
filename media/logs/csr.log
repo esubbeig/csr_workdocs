@@ -1,0 +1,5 @@
+[2020-11-18 18:12:35] INFO [csr.generate_csr:2659] Generate CSR started for project - 'project42' by - tester1
+[2020-11-18 18:12:49] INFO [csr.generate_csr:2682] Generate CSR completed for project - 'project42' by - tester1
+[2020-11-18 18:29:08] INFO [csr.add_user:196] tester1 is successfully created by admin & email sent.
+[2020-11-18 18:41:49] INFO [csr.generate_csr:2659] Generate CSR started for project - 'project1' by - tester1
+[2020-11-18 18:41:58] INFO [csr.generate_csr:2682] Generate CSR completed for project - 'project1' by - tester1

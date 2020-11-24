@@ -1,0 +1,93 @@
+{% if config != None %}
+
+  {% if project.client.is_active %}
+
+    <form class="assign_project_form" method="POST" data-url="{% url 'assign_project' project.id %}" >
+      {% csrf_token %}
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="assign_project_modalLabel">{{ project.project_name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <h6>Select Users</h6>
+        <table class="table table-hover table-striped table-bordered">
+        
+          <thead>
+            
+          </thead>
+          <tbody>
+            {% for usr in users %}
+            <tr>
+              <td>
+              {{ usr.username }}
+              </td>
+              <td>
+
+              {% if usr.id in pre_assigned_user_ids_active %}
+              <input type="checkbox" name="check_user" value="{{ usr.id }}" checked>
+              {% else %}
+              <input type="checkbox" name="check_user" value="{{ usr.id }}">
+              {% endif %}
+
+              </td>
+            </tr>
+              {% endfor %}
+              
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <p class="text-danger assin_at_least" style="display: none;">Please select atleast one user</p>
+        <!-- <input type="reset" class="btn btn-danger" value="Reset" id="assign_resetbtn" /> -->
+        <input type="button" class="btn btn-danger" value="Reset" id="assign_resetbtn" />
+        
+        <button type="submit" class="btn btn-primary assin_pro_submit" disabled='disabled' >Assign Project</button>
+      </div>
+
+    </form>
+
+  {% else %}
+
+     <div class="modal-header">
+        <h5 class="modal-title" id="assign_project_modalLabel" style="color: red;">Sorry!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <span>The client <b>({{ project.client.client_name }})</b> related to project <b>({{ project.project_name }})</b> has been deactivated. Please activate client to assign project.</span>
+              
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+      </div>
+
+  {% endif %}
+
+{% else %}
+
+     <div class="modal-header">
+        <h5 class="modal-title" id="assign_project_modalLabel" style="color: red;">Sorry!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <span>There is no Email Configurations. Please add SMTP configurations.</span>
+              
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+      </div>
+
+
+{% endif %}
+

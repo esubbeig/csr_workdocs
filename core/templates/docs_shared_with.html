@@ -1,0 +1,45 @@
+<div class="modal-header">
+	<h5 class="modal-title" id="shared_docs_with_modalLabel">Share with me</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+
+	{% if shared_documents_list %}
+
+		<table class="table table-hover table-striped table-bordered">
+	        <thead class="thead-dark">
+	        	<th>Document</th>
+	        	<!-- <th>Project</th> -->
+	        	<th>Version</th>
+	        	<th>Shared By</th>
+	        	<th>Shared On</th>
+	        	<th></th>
+	        </thead>
+	        <tbody>
+	        	{% for each in shared_documents_list %}
+
+	        		<tr>
+	        			<td style="white-space: pre-wrap;word-break: break-all;"><a href="{% url 'download_workdocs_doc' each.document_id %}" target="_blank">{{ each.document_name }}</a></td>
+	        			<!-- <td>{{ each.report.project.project_name }}</td> -->
+	        			<td>{{ each.report.version_no }}</td>
+	        			<td>{{ each.shared_by }}</td>
+	        			<td>{{ each.shared_on|date:"d/m/Y H:i" }}</td>
+	        			<td><a href="https://csrtest.awsapps.com/workdocs/index.html#/document/{{ each.document_id }}" target="_blank">Edit</a></td>
+	        		</tr>
+
+	        	{% endfor %}
+	        </tbody>
+	    </table>
+
+	{% else %}
+
+		<h6>You have no documents shared for this project.</h6>
+
+	{% endif %}
+	
+</div>
+
+<div class="modal-footer"></div>

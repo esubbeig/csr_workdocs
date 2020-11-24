@@ -1,0 +1,188 @@
+{% load static %}
+
+<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo ml-3" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" class="mr-2" alt="CSR Automation"/></a>
+        
+        <a class="navbar-brand brand-logo-mini" href="#"><img src="{% static 'images/logo-mini.png' %}" alt="logo"/></a>
+        
+      </div>
+
+      
+      <div class="b-l-1 navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      {% if user.is_authenticated %}
+       
+        {% if user.is_superuser %}
+       
+            <ul class="navbar-nav mr-lg-2 menu__ nav_ ">
+              <li>
+                <a href="{% url 'home' %}" id="header_projects_link">
+                  <i class="icons__ proj__"></i>
+                  <span>PROJECTS</span> 
+                </a> 
+              </li>
+              
+              <li>
+                {% if latest_client %}
+                  <a href="{% url 'global_csr_upload' latest_client.id %}" id="header_global_csr_link">
+                    <i class="icons__ uplo__" ></i>
+                    <span>UPLOAD CSR</span> 
+                  </a>
+                {% else %}
+                  <a id="disabled_upload_csr_header" style="cursor: pointer;">
+                    <i class="icons__ uplo__" ></i>
+                    <span>UPLOAD CSR</span> 
+                  </a>
+                {% endif %}
+              </li>
+              <li class="button-dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle__">
+                  <i class="icons__ masters__" ></i>
+                  <span>MASTERS</span></a> 
+
+        <ul class="dropdown-menu">
+          <li > <a href="{% url 'get_all_users_details' %}" id="header_users_link">Users</a></li>
+         <li><a href="{% url 'get_all_client_details' %}" id="header_clients_link">Clients</a>
+          <li><a href="{% url 'protocol_ad' %}" id="header_protsearch_link">Protocol Search</a>
+          </li>
+        </ul>
+      </li>
+                
+        </ul>
+ 
+        {% else %}
+
+          <ul class="navbar-nav mr-lg-2 menu__">
+              <li>
+                <a href="{% url 'home' %}" id="header_projects_link">
+                  <i class="icons__ proj__"></i>
+                  <span>PROJECTS</span> 
+                </a> 
+              </li>
+              <li>
+                <a href="{% url 'protocol' request.user.id %}" id="header_protsearch_link">
+                  <i class="icons__ prot__"></i>
+                  <span>PROTOCOL SEARCH</span> 
+                </a> 
+              </li>
+              <li>
+                {% if latest_client %}
+                  <a href="{% url 'display_global_csr_mapping' latest_client.id %}" id="header_globcsrmap_link">
+                    <i class="icons__ mapping__"></i>
+                    <span>GLOBAL CSR MAPPING</span> 
+                  </a> 
+                {% else %}
+                  <!-- Here use same alert as used at uploac csr -->
+                  <a id="disabled_upload_csr_header" style="cursor: pointer;">
+                    <i class="icons__ mapping__"></i>
+                    <span>GLOBAL CSR MAPPING</span> 
+                  </a>
+
+                {% endif %}
+              </li> 
+
+               <li>
+               
+              </li>
+               
+            </ul>
+
+        {% endif %}
+        <ul class="navbar-nav navbar-nav-right ">
+          
+          <!-- notification icon begins -->
+
+          <div class="notification_icon" onclick="toggleNotifi()">
+            <img src="{% static 'images/bell.png' %}" alt=""> <span id="notification_cnt_span">{{ notifications_count }}</span>
+          </div>
+
+          <div class="notifi-box" id="box">
+
+          </div>
+
+          <!-- notification icons ends -->
+          
+          
+          {% if user.is_superuser %}
+
+            <li class="nav-item clr__w">Welcome {{ user.username }} (Admin) <br>
+            {{ user.last_login }}</li>
+
+            <li class="gap-r-10 ">
+            <div class="dropdown_settings">
+               <a  class="settings"> 
+              <img src="{% static 'images/settings.png'%}" class="profile-circle"/>
+              </a>
+              <div class="submenu" style="display: none; ">
+              <ul class="root">
+              <li >
+                <a href="{% url 'audit_log' %}" id="header_audit_log_link">Audit Log</a> 
+              </li>
+              <li >
+              <a href="{% url 'activity_log' %}" id="header_activity_log_link">Activity Log</a>
+              </li>
+              <li >
+              <a data-href="{% url 'email_configuration' %}" id="email_configuration_link" data-target="#email_configuration_modal" data-toggle="modal">Email Configuration</a> 
+              </li>
+              
+              <li>
+              <a href="{% url 'mail_logs' %}" id="header_email_log_link">Email Log</a> 
+              </li>
+              <li >
+              <a href="{% url 'display_logging' %}">App Log</a>
+              </li>
+              <li>
+              <a data-href="{% url 'change_password' %}" class=" " id="change_password_link" data-target="#change_password_modal" data-toggle="modal"> Change Password 
+            </a>
+              </li>
+              </ul>
+              </div>
+
+            </div>
+          </li>
+
+          {% else %}
+
+            <li class="nav-item clr__w">Welcome {{ user.username }} {% if user.is_reviewer %} (Reviewer) {% endif %}<br>
+            {{ user.last_login }}</li>
+
+            <li class="gap-r-10 ">
+            <div class="dropdown_settings">
+               <a  class="settings"> 
+              <img src="{% static 'images/settings.png'%}" class="profile-circle"/>
+              </a>
+              <div class="submenu" style="display: none; ">
+              <ul class="root">
+              <li >
+                <a href="{% url 'audit_log' %}" id="header_audit_log_link">Audit Log</a> 
+              </li>
+              
+              <li>
+              <a data-href="{% url 'change_password' %}" class="" id="change_password_link" data-target="#change_password_modal" data-toggle="modal"> Change Password 
+            </a>
+              </li>
+              </ul>
+              </div>
+
+            </div>
+          </li>
+
+          {% endif %}
+
+          
+
+
+            </a>
+      <li class="gap-r-10 ">
+            
+          </li>
+          <li><a href="{% url 'logout' %}" class="logout__"><i class="ti-power-off "></i></a></li>
+
+        </ul>
+       
+
+      
+      {% endif %}
+
+      </div>
+    </nav>

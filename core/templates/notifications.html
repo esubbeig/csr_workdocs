@@ -1,0 +1,45 @@
+<!-- <h2>Notifications <span>{{ notifications_count }}</span></h2> -->
+
+{% if notifications %}
+
+    {% for each in notifications %}
+
+        <div class="notifi-item">
+          {% if each.event_type == 'report_comment' or each.event_type == 'report_share' or each.event_type == 'assign_project' %}
+
+          	{% if request.user.is_superuser %}
+
+		        <div class="text">
+		            <p>{{ each.messageDateTime }}</p>
+		            <h4>{{ each.message }}</h4>
+		        </div>
+
+		    {% else %}
+		    	<a href="{% url 'project_dashboard' request.user.id each.projectId %}" >
+			    	<div class="text">
+			            <p>{{ each.messageDateTime }}</p>
+			            <h4>{{ each.message }}</h4>
+			        </div>
+		        </a>
+
+		    {% endif %}
+
+	      {% else %} 
+
+	      	<div class="text">
+	            <p>{{ each.messageDateTime }}</p>
+	            <h4>{{ each.message }}</h4>
+	        </div>
+
+	      {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+    
+
+{% else %}
+
+
+{% endif %}
